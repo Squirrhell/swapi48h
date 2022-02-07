@@ -12,11 +12,12 @@ const store = createStore({
         }
         */
       ],
+      selectedTheme: null,
 
     },
     mutations: {
       addQuestionQuiz: (state, newQuestion) => {state.listQuiz.push(newQuestion)},
-    
+      setSelectedTheme: (state, newTheme) => {state.selectedTheme = newTheme},
 
     }
 })
