@@ -26,8 +26,12 @@
                 <template v-if="!(item in banWord)">
                     <h1>{{ index }}:</h1>
                     <dir v-if="(typeof item) == 'object' && index != 'films'">
-                        
+                        <dir v-for="item in item" :key="item">{{ getApiData(item).result.name }}</dir>
                     </dir>
+                    <dir v-else-if="(typeof item) == 'object' && index == 'films'"> 
+                        <dir v-for="item in item" :key="item">{{ getApiData(item).result.title }}</dir>
+                    </dir>
+                    <dir v-else>{{ item }}</dir>
                 </template>
             </h1>
         </div>
