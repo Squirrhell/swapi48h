@@ -4,14 +4,17 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-  <div>
-    <header>
-      <Header />
-    </header>
-    <main>
-      <router-view/>     
-    </main>
-  </div>
+  <header>
+
+  </header>
+
+  <main>
+    <router-view />
+  </main>
+
+  <footer>
+
+  </footer>
 </template>
 
 <style>
