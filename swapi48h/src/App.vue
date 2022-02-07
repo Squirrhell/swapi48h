@@ -51,6 +51,7 @@ a,
   body {
     display: flex;
     place-items: center;
+    background-color: var(--main-gray);
   }
 
   #app {
