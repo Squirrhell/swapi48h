@@ -8,22 +8,22 @@ const notFound = { template: '<div>Error 404</div>' };
 
 const routes = [
     /*{ 
-        path: '/Home' , 
+        path: '/home' , 
         name: 'Home', 
         component: Home
     },
     { 
-        path: '/Theme', 
+        path: '/theme', 
         name: 'Theme', 
         component: Theme
     },
     {
-        path: '/Wiki',
+        path: '/wiki',
         name: 'Wiki',
         component: Wiki
     },*/
     {
-        path: '/Quiz',
+        path: '/quiz',
         name: 'Quiz',
         component: Quiz
     }
