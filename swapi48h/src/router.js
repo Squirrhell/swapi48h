@@ -36,3 +36,4 @@ const router = createRouter({
 
 export default router
 
+// npm install vue-router@4

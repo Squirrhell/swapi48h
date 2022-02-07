@@ -5,12 +5,16 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
   <header>
-    <Header />
+
   </header>
 
   <main>
-    <TheWelcome />
+    <router-view />
   </main>
+
+  <footer>
+
+  </footer>
 </template>
 
 <style>
