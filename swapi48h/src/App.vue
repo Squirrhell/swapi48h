@@ -22,9 +22,13 @@ import Header from './components/Header.vue';
 
 <style>
 body {
-  background-color: #182840;
+  background-color: #EEEEEE;
   margin: 0;
 
+}
+
+header {
+  background-color: #182840;
 }
 /*@import './assets/base.css';
 
