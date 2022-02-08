@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import store from "../store.js";
-import QuizAnswers from "./QuizAnswer.vue";
+import QuizAnswer from "./QuizAnswer.vue";
 
 import questionsJSON from "../assets/questions.json"
 
@@ -15,15 +15,15 @@ store.commit("throwQuestionQuiz") //appel la "fonction" dans mutations du store
 
 const actualQuestion = ref('This is the question?');
 const numberOfQuestions = ref(10);
-const numberOfActualQuestion = ref(0);
+let numberOfActualQuestion = ref(0);
 const pickedAnswer = ref('');
 const numberOfPossibleAnswer = ref(4);
 
 const newQuestion = {
-    question: 'laQuestion',
-    answers: ['reponse1','reponse2','reponse3','reponse4'],
-    correctAnswer: 0, //en fonciton de R
-    answer: 0, //reponse de la personne
+    question: ref('laQuestion'),
+    answers: ref(['reponse1','reponse2','reponse3','reponse4']),
+    correctAnswer: ref(0), //en fonciton de R
+    answer: ref(0), //reponse de la personne
 }
 
 // const newQuestion = new Vue({
@@ -48,6 +48,8 @@ function validateQuestion(indexOfChosenAnswer) {
     generateNewQuestion();
 
     console.log(newQuestion.answers[1]);
+
+    numberOfActualQuestion.value += 1;
 }
 
 async function generateNewQuestion() {
@@ -60,9 +62,9 @@ async function generateNewQuestion() {
     // let questionFormat = getElementForQuestion(questionsJSON[randomQuestionID].missingWordType, questionsJSON[randomQuestionID].answerKey, questionsJSON[randomQuestionID].typeOfAnswer)
     let questionFormat = await getNewQuestionElements(questionsJSON[randomQuestionID].missingWordCategory, questionsJSON[randomQuestionID].missingWordType, questionsJSON[randomQuestionID].answerKey)
 
-    newQuestion.question = questionsJSON[randomQuestionID].question + questionFormat.missingWordInQuestion;
-    newQuestion.answers = questionFormat.finalAnswers;
-    newQuestion.correctAnswer = questionFormat.rightAnswerIndex;
+    newQuestion.question.value = questionsJSON[randomQuestionID].question + questionFormat.missingWordInQuestion;
+    newQuestion.answers.value = questionFormat.finalAnswers;
+    newQuestion.correctAnswer.value = questionFormat.rightAnswerIndex;
 
     // this.$set(this.$newQuestion, 'question', questionsJSON[randomQuestionID].question + questionFormat.missingWordInQuestion);
     // this.$set(this.$newQuestion, 'answers', questionFormat.finalAnswers);
@@ -162,7 +164,7 @@ function randomizeAnswer(rightAnswer, wrongAnswers) {
     <div v-if="numberOfActualQuestion+1 < numberOfQuestions" class="quiz">
         <h1>QUIZ</h1>
         <h2>{{ numberOfActualQuestion+1 }} / {{ numberOfQuestions }}</h2>
-        <h2>{{ newQuestion.question }}</h2>
+        <h2>{{ newQuestion.question.value }}</h2>
         <div class="answer">
             <!-- <div class="answer-element">
                 <input type="radio" id="choice1" name="quiz-answer" value="answer1">
@@ -187,7 +189,7 @@ function randomizeAnswer(rightAnswer, wrongAnswers) {
             </div>
             <button class="button-validate" @click="validateQuestion()">Validate</button> -->
 
-            <div v-for="(answer, index) in newQuestion.answers" :key="index" class="answer-element">
+            <div v-for="(answer, index) in newQuestion.answers.value" :key="index" class="answer-element">
                 <input type="radio" name="quiz-answer" :value="index" v-model="pickedAnswer"> 
                 <label :for="index">{{ answer }}</label>
             </div>
