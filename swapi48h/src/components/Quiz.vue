@@ -33,9 +33,19 @@ async function validateQuestion(indexOfChosenAnswer) {
 
     console.log(indexOfChosenAnswer)
     newQuestion.answer = indexOfChosenAnswer; //on ajoute à "answer", l'index de la réponse choisi par l'utilisateur
-    store.commit("addQuestionQuiz", newQuestion) // et on ajoute l'objet, au tableau d'objet du quiz.
+
+    let finalNewQuestion = {
+        question: newQuestion.question.value,
+        answers: newQuestion.answers.value,
+        correctAnswer: newQuestion.correctAnswer.value,
+        answer: newQuestion.answer
+    }
+
+    store.commit("addQuestionQuiz", finalNewQuestion) // et on ajoute l'objet, au tableau d'objet du quiz.
 
     await generateNewQuestion();
+
+    console.log(store.state.listQuiz)
 
     console.log(newQuestion.answers[1]);
 
@@ -74,20 +84,20 @@ async function getNewQuestionElements(missingWordCategory, missingWordType, answ
     }
     
     //Nombre random entre 0 et le nombre de valeur dans une catégorie
-    let randomRightID = Math.floor(Math.random() * allDataTheme.value.count);
+    // let randomRightID = Math.floor(Math.random() * allDataTheme.value.count);
     //------------------
     //ca risque de planter, certaines entrées sont vides (ex: vehicles/1, le premier est le 4 puis ça passe à 11)
 
     // const missingWordInQuestion = await getCorrespondingInfo(urlData+`/${randomRightID}`, missingWordType)
     // const rightAnswer = await getCorrespondingInfo(urlData+`/${randomRightID}`, answerKey);
-    const [missingWordInQuestion, rightAnswer] = await getCorrespondingInfo(urlData+`/${randomRightID}`, missingWordType, answerKey)
+    const [missingWordInQuestion, rightAnswer] = await getCorrespondingInfo(urlData, allDataTheme.value.count, missingWordType, answerKey)
     const wrongAnswers = [];
     
     //Boucle sur le nombre de réponse fausse que l'on veut ajouter au réponse possible.
     for(let i = 0; i < numberOfPossibleAnswer.value; i++) {
         console.log(i);
-        let randomWrongID = Math.floor(Math.random() * allDataTheme.value.count);
-        wrongAnswers.push(...await getCorrespondingInfo(urlData+`/${randomWrongID}`, answerKey));
+        // let randomWrongID = Math.floor(Math.random() * allDataTheme.value.count);
+        wrongAnswers.push(...await getCorrespondingInfo(urlData, allDataTheme.value.count, answerKey));
     }
 
     const finalAnswers = randomizeAnswer(rightAnswer, wrongAnswers);
@@ -101,43 +111,34 @@ async function getNewQuestionElements(missingWordCategory, missingWordType, answ
     return newQuestionElements;
 }
 
-async function getCorrespondingInfo(urlToGet, ...keysOfElement) {
+async function getCorrespondingInfo(urlToGet, nbrOfElements, ...keysOfElement) {
+    let newUrlToGet = '';
+    if(!urlToGet.match(/[1-9]/g)) {
+        let newRandomID = Math.floor(Math.random() * nbrOfElements);
+        newUrlToGet = `${urlToGet}/${newRandomID}`; 
+    } else {
+       newUrlToGet = urlToGet; 
+    }
+
+
     const option = {
         method: "GET",
     };
     //Données d'un élément (récupérer via l'ID qui correspond au nombre aléatoire au dessus)
-    const response = await fetch(urlToGet, option);
+    const response = await fetch(newUrlToGet, option);
     const element = ref("");
     if(response.status == 200) {
         const data = await response.json();
         element.value = data;
     } else {
-        // getCorrespondingInfo(urlToGet, keyOfElement)
+        return getCorrespondingInfo(urlToGet, nbrOfElements, keysOfElement)
     }
-    // console.log(urlToGet+ " " +element.value[keyOfElement]);
-
-    // if(element.value[firstKeyOfEl].match(/^https:\/\/swapi\.dev\/api\//g)) {
-    //    return getCorrespondingInfo(element.value[firstKeyOfEl], "name"), element.value[secondKeyOfEl];
-    // } else {
-    //     return element.value[firstKeyOfEl], element.value[secondKeyOfEl];
-    // }
-
-    // if(element.value[firstKeyOfEl].match(/^https:\/\/swapi\.dev\/api\//g) && element.value[secondKeyOfEl].match(/^https:\/\/swapi\.dev\/api\//g)) {
-    //    return getCorrespondingInfo(element.value[firstKeyOfEl], "name"), element.value[secondKeyOfEl];
-    // } else if(element.value[firstKeyOfEl].match(/^https:\/\/swapi\.dev\/api\//g)) {
-    //     return element.value[firstKeyOfEl], element.value[secondKeyOfEl];
-    // } else if() {
-
-    // } else {
-
-    // }
 
     let finalValues = [];
 
     for(let key of keysOfElement) {
-        console.log(key);
         if(element.value[key].match(/^https:\/\/swapi\.dev\/api\//g)) {
-           finalValues.push(...await getCorrespondingInfo(element.value[key], "name"));
+           finalValues.push(...await getCorrespondingInfo(element.value[key], nbrOfElements, "name"));
         } else {
             finalValues.push(element.value[key]);
         }
