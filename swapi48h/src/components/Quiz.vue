@@ -75,6 +75,8 @@ async function getNewQuestionElements(missingWordCategory, missingWordType, answ
     
     //Nombre random entre 0 et le nombre de valeur dans une catégorie
     let randomRightID = Math.floor(Math.random() * allDataTheme.value.count);
+    //------------------
+    //ca risque de planter, certaines entrées sont vides (ex: vehicles/1, le premier est le 4 puis ça passe à 11)
 
     // const missingWordInQuestion = await getCorrespondingInfo(urlData+`/${randomRightID}`, missingWordType)
     // const rightAnswer = await getCorrespondingInfo(urlData+`/${randomRightID}`, answerKey);
