@@ -58,10 +58,10 @@
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 .theme{
-    margin-left: 5em;
-    margin-top: 2em;
+    margin-left: 8em;
+    margin-top: 3em;
     color: #182840 ;
-    font-size: 3em;
+    font-size: 2em;
     font-family: 'Montserrat';
 }
 .element{
@@ -78,7 +78,7 @@ li {
 }
 .galaxie {
     float: right;
-    margin-top: -11em;
+    margin-top: -7em;
     margin-left: 43em;
     position: fixed;
 }

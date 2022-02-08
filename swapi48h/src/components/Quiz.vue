@@ -20,7 +20,7 @@ const pickedAnswer = ref('');
 const numberOfPossibleAnswer = ref(3);
 
 const newQuestion = {
-    question: ref('laQuestion'),
+    question: ref(''),
     answers: ref(['reponse1','reponse2','reponse3','reponse4']),
     correctAnswer: ref(0), //en fonciton de R
     answer: ref(0), //reponse de la personne
