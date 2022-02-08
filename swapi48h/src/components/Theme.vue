@@ -4,15 +4,13 @@
     import { ref, watch } from 'vue';
 
     const router = useRouter();
+
     const elements = ref([]);
     let listEl = [];
-
     async function getDataFromTheme(next) {
-
         const option = {
             method: "GET",
         };
-
         const response = await fetch(next, option);
         if(response.status == 200) {
             response.json().then(data => {
@@ -33,8 +31,8 @@
 
 
     watch(() => store.state.selectedTheme, () => {listEl=[];getDataFromTheme('https://swapi.dev/api/'+store.state.selectedTheme)})
-    getDataFromTheme('https://swapi.dev/api/'+store.state.selectedTheme);
 
+    getDataFromTheme('https://swapi.dev/api/'+store.state.selectedTheme);
 </script>
 
 
@@ -76,18 +74,57 @@ li {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2.5em;
 }
-
 .galaxie {
     float: right;
-    margin-top: -6em;
-    margin-left: 50em;
+    margin-top: -11em;
+    margin-left: 43em;
     position: fixed;
 }
-
 .imageGalaxie {
-    border-radius: 30em;
-    width: 30em;
-    height: 30em;
+    width: 49em;
+    height: 37em;
 }
 
+
+@media screen and (max-width: 780px){
+.imageGalaxie {
+    width: 0%;
+    height: 0%;
+}
+
+.theme{
+    margin-left: 4em;
+    margin-top: 3em;
+    font-size: 2em;
+}
+
+.element{
+    margin-top: -0.5em;
+    margin-left: 8em;
+    
+}
+
+}
+
+@media screen and (max-width: 322px){
+
+.imageGalaxie {
+    width: 0%;
+    height: 0%;
+}
+
+.theme{
+    margin-left: 2em;
+    margin-top: 3.5em;
+    font-size: 1.5em;
+}
+
+.element{
+    margin-top: -0.5em;
+    margin-left: 2em;
+    
+}
+
+
+}
 </style>
