@@ -4,6 +4,7 @@ import Theme from "./components/Theme.vue";
 import Wiki from "./components/Wiki.vue";
 //import Quiz from "./components/Quiz.vue";
 
+
 const notFound = { template: '<div>Error 404</div>' };
 
 const routes = [
@@ -16,7 +17,7 @@ const routes = [
         path: '/theme', 
         name: 'Theme', 
         component: Theme
-    },
+    },*/
     {
         path: '/wiki',
         name: 'Wiki',
