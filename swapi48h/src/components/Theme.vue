@@ -1,7 +1,7 @@
 <script setup> 
     import { useRouter } from 'vue-router';
     import store from '../store.js'
-    import { ref, watch } from 'vue';
+    import { computed, ref, watch } from 'vue';
 
     const router = useRouter();
 
@@ -33,6 +33,13 @@
     watch(() => store.state.selectedTheme, () => {listEl=[];getDataFromTheme('https://swapi.dev/api/'+store.state.selectedTheme)})
 
     getDataFromTheme('https://swapi.dev/api/'+store.state.selectedTheme);
+    const image = computed(() => {
+        const list = ["planets", "spaceships", "vehicles", "people", "films", "species"];
+        let index = list.findIndex( theme => theme === store.state.selectedTheme);
+        console.log(index);
+        index++;
+        return index;
+    })
 </script>
 
 
@@ -49,7 +56,9 @@
     </template>
     </ul>
     </div>
-    <div class="galaxie"> <img class="imageGalaxie" src="../../image/Galaxymap_p1.jpg" alt=""></div>
+    <div class="galaxie"> 
+        <img class="imageGalaxie" :src='"../../image/img"+image+".png"' alt="">
+    </div>
 </template>
 
 
