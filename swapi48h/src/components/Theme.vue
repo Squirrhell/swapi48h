@@ -58,7 +58,7 @@
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 .theme{
-    margin-left: 8em;
+    margin-left: 7em;
     margin-top: 3em;
     color: #182840 ;
     font-size: 2em;
@@ -66,9 +66,9 @@
 }
 .element{
     margin-top: -0.5em;
-    margin-left: 14em;
+    margin-left: 12em;
     float: left;
-    
+    size: 2em;
 }
 li {
     list-style: none;
@@ -79,11 +79,11 @@ li {
 .galaxie {
     float: right;
     margin-top: -7em;
-    margin-left: 43em;
+    margin-left: 49em;
     position: fixed;
 }
 .imageGalaxie {
-    width: 49em;
+    width: 47em;
     height: 37em;
 }
 

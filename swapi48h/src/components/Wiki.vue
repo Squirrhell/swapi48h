@@ -83,9 +83,6 @@
         }
         return formatedVarData;
     }
-
-    
-
 </script>
 
 <template>
@@ -116,9 +113,12 @@
 
 <style scoped>
 .wiki{
+    border-width:1px;
+    border-style:dotted;
+    border-color:black;
+    margin-left: 5em;
     z-index: -1;
     margin-top: 5em;
-    position:fixed;
 }
 template {
     background-color: aquamarine;
