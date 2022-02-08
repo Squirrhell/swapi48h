@@ -2,18 +2,16 @@
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 import Header from './components/Header.vue';
+import Home from './components/Home.vue';
 </script>
 
 <template>
-<body>
-  <header>
-    <Header />
-
-  </header>
-  
-    
+  <body>
+    <header>
+      <Header />
+      <Home />
+    </header>
   </body>
-
 </template>
 
 
@@ -21,7 +19,7 @@ import Header from './components/Header.vue';
 body {
   background-color: #182840;
   margin: 0;
-  
+
 }
 /*@import './assets/base.css';
 
