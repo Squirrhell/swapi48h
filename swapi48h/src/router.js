@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 //import Home from "./components/Home.vue";
+
 import Theme from "./components/Theme.vue";
 //import Wiki from "./components/Wiki.vue";
 //import Quiz from "./components/Quiz.vue";
@@ -7,8 +8,8 @@ import Theme from "./components/Theme.vue";
 const notFound = { template: '<div>Error 404</div>' };
 
 const routes = [
-   /* { 
-        path: '/Home' , 
+    /*{ 
+        path: '/' , 
         name: 'Home', 
         component: Home
     },*/
@@ -18,12 +19,12 @@ const routes = [
         component: Theme
     },
     /*{
-        path: '/Wiki',
+        path: '/wiki',
         name: 'Wiki',
         component: Wiki
     },
     {
-        path: '/Quiz',
+        path: '/quiz',
         name: 'Quiz',
         component: Quiz
     }*/
