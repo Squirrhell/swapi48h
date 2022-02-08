@@ -19,11 +19,11 @@
 </script>
 
 <template>
-  <!--div v-for="question in store.state.listQuiz"-->
-  <div v-for="question in listTest">
-    <h2>{{ question.Q }}</h2>
-    <template v-for="(reponse, index) in question.R">
-    <h3 :class="{green: index==question.C, red: index==question.A&&question.C!=question.A}">{{ reponse }}</h3>
+  <div v-for="question in store.state.listQuiz">
+  <!-- <div v-for="question in listTest"> -->
+    <h2>{{ question.question }}</h2>
+    <template v-for="(reponse, index) in question.answers">
+    <h3 :class="{green: index==question.correctAnswer, red: index==question.answer&&question.correctAnswer!=question.answer}">{{ reponse }}</h3>
     </template>
 
   </div>

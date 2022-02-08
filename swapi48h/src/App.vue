@@ -65,6 +65,7 @@ a,
 @media (min-width: 1024px) {
   body {
     display: flex;
+
   }
   #app {
     display: grid;
