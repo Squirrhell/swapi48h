@@ -1,6 +1,7 @@
 <script setup> 
-import store from '../store.js'
-const elements = ref([]);
+import store from '../store'
+import { ref, watch } from 'vue';
+    const elements = ref([]);
     async function getDataFromTheme() {
         let next;
         elements.value = [];
@@ -14,17 +15,15 @@ const elements = ref([]);
                 response.json().then(data => {
                     elements.value.concat(data.results); 
                     next = data.next;
-                });
-            }
+            });
         }
     }
-    watch(() => store.state.selectedTheme, () => {getDataFromTheme()})
+}
+watch(() => store.state.selectedTheme, () => {getDataFromTheme()})
 </script>
 
+
 <template>
-<div class="api">
-    {{ data }}
-</div>
 </template>
 
 
