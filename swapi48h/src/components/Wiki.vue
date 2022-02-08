@@ -1,5 +1,6 @@
 <script setup>
     import {computed, ref} from 'vue';
+    import store from '../store.js';
 
     const props = defineProps({
         urlElement: {
@@ -8,7 +9,7 @@
         }
     });
     
-    const urlElement = "https://swapi.dev/api/people/1/";
+    const urlElement = store.state.selectedItem;
     const banWord = ["created", "edited", "url", "opening_crawl"];
     const varData = ref(null);
     
@@ -88,7 +89,7 @@
 </script>
 
 <template>
-
+<div class="wiki">
     <template v-for="(item, index) in varData" :key="item">
         <h1 v-if="!(banWord.includes(index))">{{ index }}: {{ item ? item:'' }}</h1>
     </template>
@@ -109,10 +110,16 @@
             </h1>
         </div>
     </div> -->
+</div>
 </template>
 
 
 <style scoped>
+.wiki{
+    z-index: -1;
+    margin-top: 5em;
+    position:fixed;
+}
 template {
     background-color: aquamarine;
     margin: 0%;
