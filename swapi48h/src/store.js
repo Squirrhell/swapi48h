@@ -12,11 +12,7 @@ const store = createStore({
         }
         */
       ],
-<<<<<<< HEAD
-      selectedTheme: "planets",
-=======
       selectedTheme: 'planets',
->>>>>>> 344134f5c46ab0132690ad67bb11ff0939525391
 
     },
     mutations: {
