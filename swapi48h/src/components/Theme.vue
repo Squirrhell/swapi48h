@@ -8,12 +8,14 @@
     const elements = ref([]);
     let listEl = [];
     async function getDataFromTheme(next) {
+        console.log(next);
         const option = {
             method: "GET",
         };
         const response = await fetch(next, option);
         if(response.status == 200) {
             response.json().then(data => {
+                console.log(data)
                 listEl = listEl.concat(data.results); 
                 if(data.next){
                     getDataFromTheme(data.next);
