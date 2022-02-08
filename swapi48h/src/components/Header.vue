@@ -36,6 +36,8 @@ body {
     margin: 0px;
     bottom: 0px;
     background-color: #182840;
+    width: 100%;
+    height: 100%;
 }
 
 .burgerDiv {

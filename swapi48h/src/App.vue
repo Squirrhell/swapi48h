@@ -5,28 +5,32 @@ import Header from './components/Header.vue';
 </script>
 
 <template>
+<body>
   <header>
     <Header />
 
   </header>
+  
+    
+  </body>
 
-  <main>
-  </main>
 </template>
 
+
 <style>
-@import './assets/base.css';
+body {
+  background-color: #182840;
+  margin: 0;
+  
+}
+/*@import './assets/base.css';
 
 #app {
-  max-width: 1280px;
+  max-width: 0px;
   margin: 0 auto;
   padding: 2rem;
 
   font-weight: normal;
-}
-
-header {
-  line-height: 1.5;
 }
 
 .logo {
@@ -50,7 +54,6 @@ a,
 @media (min-width: 1024px) {
   body {
     display: flex;
-    place-items: center;
   }
 
   #app {
@@ -74,5 +77,5 @@ a,
   .logo {
     margin: 0 2rem 0 0;
   }
-}
+}*/
 </style>
