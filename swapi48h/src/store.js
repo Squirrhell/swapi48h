@@ -12,13 +12,15 @@ const store = createStore({
         }
         */
       ],
-      selectedTheme: null,
+      selectedTheme: 'planets',
+      selectedItem: 'https://swapi.dev/api/planets/1/'
 
     },
     mutations: {
       addQuestionQuiz: (state, newQuestion) => {state.listQuiz.push(newQuestion)},
       throwQuestionQuiz: (state) => {state.listQuiz = []},
       setSelectedTheme: (state, newTheme) => {state.selectedTheme = newTheme},
+      setSelectedItem: (state, newItem) => {state.selectedItem = newItem},
 
     }
 })
