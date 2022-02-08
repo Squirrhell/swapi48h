@@ -1,10 +1,8 @@
 <script setup>
 defineProps({
-  msg: {
-    type: String,
-    required: true
-  }
+
 })
+const liste = ["Planets", "Spaceships", "Vehicles", "People", "Films", "Species"];
 </script>
 
 <template>
@@ -16,23 +14,8 @@ defineProps({
         <div class="menu">
                     
             <ul>
-                <li>
-                    <a class="menuLien" href="/">Planets</a> 
-                </li>
-                <li>
-                    <a class="menuLien" href="">Spaceships</a> 
-                </li>
-                <li>
-                    <a class="menuLien" href="">Vehicles</a>  
-                </li>
-                <li>
-                    <a class="menuLien" href="">People</a> 
-                </li>
-                <li>
-                    <a class="menuLien" href="">Films</a> 
-                </li>
-                <li>
-                    <a class="menuLien" href="">Species</a> 
+                <li v-for="element in liste" :key="element">
+                    <a class="menuLien" href="">{{element}}</a> 
                 </li>
                 <li>
                     <a class="menuLien" href="">Quiz</a> 
