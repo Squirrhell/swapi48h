@@ -38,6 +38,9 @@ const liste = ["Planets", "Spaceships", "Vehicles", "People", "Films", "Species"
     margin-left: 10px;
     margin-top: 15px;
 
+    position: relative;
+    z-index: 2;
+
 }
 
 .menuBurger {
@@ -117,6 +120,8 @@ li {
 
 .divLogo {
     width: 233.75px;
+    position: relative;
+    z-index: 1;
     float: right;
 }
 

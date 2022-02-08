@@ -72,4 +72,47 @@ li {
     width: 49em;
     height: 37em;
 }
+
+
+@media screen and (max-width: 780px){
+.imageGalaxie {
+    width: 0%;
+    height: 0%;
+}
+
+.theme{
+    margin-left: 4em;
+    margin-top: 3em;
+    font-size: 2em;
+}
+
+.element{
+    margin-top: -0.5em;
+    margin-left: 8em;
+    
+}
+
+}
+
+@media screen and (max-width: 322px){
+
+.imageGalaxie {
+    width: 0%;
+    height: 0%;
+}
+
+.theme{
+    margin-left: 2em;
+    margin-top: 3.5em;
+    font-size: 1.5em;
+}
+
+.element{
+    margin-top: -0.5em;
+    margin-left: 2em;
+    
+}
+
+
+}
 </style>
