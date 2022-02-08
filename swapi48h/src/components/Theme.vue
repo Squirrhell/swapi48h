@@ -64,7 +64,7 @@ li {
 }
 .galaxie {
     float: right;
-    margin-top: -9em;
+    margin-top: -11em;
     margin-left: 43em;
     position: fixed;
 }
