@@ -6,53 +6,42 @@ const liste = ["Planets", "Spaceships", "Vehicles", "People", "Films", "Species"
 </script>
 
 <template>
-<body>  
-    <div class="burgerDiv">
-        <img class="menuBurger" src="image/menu.png" alt="">
-    
-    
-        <div class="menu">
-                    
-            <ul>
-                <li v-for="element in liste" :key="element">
-                    <a class="menuLien" href="">{{element}}</a> 
-                </li>
-                <li>
-                    <a class="menuLien" href="">Quiz</a> 
-                </li>
-            </ul>
+    <div class="Header">
+        <div class="burgerDiv">
+            <img class="menuBurger" src="image/menu.png" alt="">
+                <div class="menu">        
+                    <ul>
+                        <li v-for="element in liste" :key="element">
+                            <a class="menuLien" href="">{{element}}</a> 
+                        </li>
+                        <li>
+                            <a class="menuLien" href="">Quiz</a> 
+                        </li>
+                    </ul>
+                </div>
+        </div> 
+        <div class="divLogo">
+            <a class="lienLogo" href="">
+                <img class="logo" src="image/alijabba.png" alt="">
+            </a>
         </div>
-    </div> 
-    <div>
-        <a class="lienLogo" href="">
-            <img class="logo" src="image/alijabba.png" alt="">
-        </a>
     </div>
-    </body>
 </template>
 
 <style scoped>
-body {
-    margin: 0px;
-    bottom: 0px;
-    /*background-color: #182840;*/
-    width: 100%;
-    height: 100%;
-}
 
 .burgerDiv {
     width: 50px;
     height: 50px;
     border-radius: 30px;
     background-color: #FFF000;
-    margin-left: 15px;
+    margin-left: 10px;
     margin-top: 15px;
+
 }
 
 .menuBurger {
-    width: 50px;
-    height: 50px;
-
+    width:  50px;
 }
 
 li {
@@ -118,12 +107,29 @@ li {
 
 .logo {
     position: fixed;
+    
     top: 30px;
     width: 233.75px;
-    height: 41.25;
-    margin-left: 80%;
+    height: 41.25px;
     /*934
     165*/
 }
 
+.divLogo {
+    width: 233.75px;
+    float: right;
+}
+
+
+.Header {
+    background-color: #182840;
+    width: 100%;
+    height: 5em;
+    position: fixed;
+    top: 0px;
+    /* margin-top: -9em; */
+    /* z-index: -7; */
+}
+
 </style>
+
