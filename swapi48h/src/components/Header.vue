@@ -1,8 +1,20 @@
 <script setup>
+import { useRouter } from 'vue-router';
+import store from '../store.js';
+
 defineProps({
 
 })
-const liste = ["Planets", "Spaceships", "Vehicles", "People", "Films", "Species"];
+const liste = ["planets", "spaceships", "vehicles", "people", "films", "species"];
+
+const router = useRouter();
+
+
+function swapTheme(theme){
+    store.commit('setSelectedTheme', theme);
+    router.push('theme');
+};
+
 </script>
 
 <template>
@@ -13,17 +25,17 @@ const liste = ["Planets", "Spaceships", "Vehicles", "People", "Films", "Species"
                 <div class="menu">        
                     <ul>
                         <li v-for="element in liste" :key="element">
-                            <a class="menuLien" href="">{{element}}</a> 
+                            <p class="menuLien" @click="swapTheme(element)">{{element}}</p> 
                         </li>
                         <li>
-                            <a class="menuLien" href="">Quiz</a> 
+                            <p class="menuLien" @click="router.push('quiz')">Quiz</p> 
                         </li>
                     </ul>
                 </div>
         </div> 
         <div class="divLogo">
             <a class="lienLogo" href="">
-                <img class="logo" src="image/alijabba.png" alt="">
+                <img class="logo" src="image/alijabba.png" alt="" @click="router.push('/')">
             </a>
         </div>
     </div>
