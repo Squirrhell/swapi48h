@@ -1,8 +1,38 @@
 [
     {
-        "question": "Where is born ",
+        "question": ["Where is ", "insertVal", " from?"],
         "missingWordCategory": "people",
         "missingWordType": "name",
         "answerKey": "homeworld"
+    },
+    {
+        "question": ["What is ", "insertVal", "'s year of birth?"],
+        "missingWordCategory": "people",
+        "missingWordType": "name",
+        "answerKey": "birth_year"
+    },
+    {
+        "question": ["What is ", "insertVal", "'s hair color?"],
+        "missingWordCategory": "people",
+        "missingWordType": "name",
+        "answerKey": "hair_color"
+    },
+    {
+        "question": ["What is the climate on ", "insertVal", "?"],
+        "missingWordCategory": "planets",
+        "missingWordType": "name",
+        "answerKey": "climate"       
+    },
+    {
+        "question": ["What is the population of ", "insertVal", "?"],
+        "missingWordCategory": "planets",
+        "missingWordType": "name",
+        "answerKey": "population"          
+    },
+    {
+        "question": ["What is the rotation period of ", "insertVal", "?"],
+        "missingWordCategory": "planets",
+        "missingWordType": "name",
+        "answerKey": "rotation_period"           
     }
 ]

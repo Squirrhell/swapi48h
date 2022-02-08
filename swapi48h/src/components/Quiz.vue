@@ -20,13 +20,13 @@ const pickedAnswer = ref('');
 const numberOfPossibleAnswer = ref(3);
 
 const newQuestion = {
-    question: ref('laQuestion'),
+    question: ref('Wait for the first question ;)'),
     answers: ref(['reponse1','reponse2','reponse3','reponse4']),
     correctAnswer: ref(0), //en fonciton de R
     answer: ref(0), //reponse de la personne
 }
 
-validateQuestion();
+generateNewQuestion();
 
 async function validateQuestion(indexOfChosenAnswer) {
     isLoading.value = true;
@@ -51,21 +51,26 @@ async function validateQuestion(indexOfChosenAnswer) {
 
     numberOfActualQuestion.value += 1;
 
-    isLoading.value = false;
+    // isLoading.value = false;
 }
 
 async function generateNewQuestion() {
-
+    isLoading.value = true; //On met isLoading à "true" pour ne pas afficher de question
     let randomQuestionID = Math.floor(Math.random() * questionsJSON.length)
 
     
     console.log(questionsJSON[randomQuestionID].question)
 
     let questionFormat = await getNewQuestionElements(questionsJSON[randomQuestionID].missingWordCategory, questionsJSON[randomQuestionID].missingWordType, questionsJSON[randomQuestionID].answerKey)
+    
+    let templateQuestion = [...questionsJSON[randomQuestionID].question] //on met dans une variable pour plus de lisibilité
+    templateQuestion.splice(templateQuestion.indexOf("insertVal"), 1, questionFormat.missingWordInQuestion); //on remplace la valeur "insertVal" par le mot manquant (qu'on a récupérer précédemment)
 
-    newQuestion.question.value = questionsJSON[randomQuestionID].question + questionFormat.missingWordInQuestion;
+    newQuestion.question.value = templateQuestion.join(""); //on y met la question ("join" pour transformer le tableau en string)
     newQuestion.answers.value = questionFormat.finalAnswers;
     newQuestion.correctAnswer.value = questionFormat.rightAnswerIndex;
+    isLoading.value = false; //On est prêt à afficher la question
+
 }
 
 async function getNewQuestionElements(missingWordCategory, missingWordType, answerKey) { //voir s'il y a deja une fonction comme celle-ci quelque part.
@@ -130,17 +135,28 @@ async function getCorrespondingInfo(urlToGet, nbrOfElements, ...keysOfElement) {
     if(response.status == 200) {
         const data = await response.json();
         element.value = data;
+        console.log("JE SUIS ICI")
     } else {
+        console.log("JE SUIS TON PADRE MON POTE")
+        // console.log(urlToGet)
         return getCorrespondingInfo(urlToGet, nbrOfElements, keysOfElement)
     }
 
+    console.log("mais vasi-je ici juste apres le padre ??")
     let finalValues = [];
 
     for(let key of keysOfElement) {
-        if(element.value[key].match(/^https:\/\/swapi\.dev\/api\//g)) {
-           finalValues.push(...await getCorrespondingInfo(element.value[key], nbrOfElements, "name"));
+
+        let actualRetrieveElement = element.value[key]; //vérif de si cest un tableau
+
+        if(actualRetrieveElement == undefined) {
+            return await getCorrespondingInfo(urlToGet, nbrOfElements, keysOfElement)
+        }
+
+        if(actualRetrieveElement.match(/^https:\/\/swapi\.dev\/api\//g)) {
+           finalValues.push(...await getCorrespondingInfo(actualRetrieveElement, nbrOfElements, "name"));
         } else {
-            finalValues.push(element.value[key]);
+            finalValues.push(actualRetrieveElement);
         }
     }
 
@@ -163,48 +179,106 @@ function randomizeAnswer(rightAnswer, wrongAnswers) {
     </div>
     <div v-else-if="numberOfActualQuestion < numberOfQuestions" class="quiz">
         <h1>QUIZ</h1>
-        <h2>{{ numberOfActualQuestion }} / {{ numberOfQuestions }}</h2>
-        <h2>{{ newQuestion.question.value }}</h2>
-        <div class="answer">
-            <div v-for="(answer, index) in newQuestion.answers.value" :key="index" class="answer-element">
-                <input type="radio" name="quiz-answer" :value="index" v-model="pickedAnswer"> 
-                <label :for="index">{{ answer }}</label>
+        <div class="quiz-content">
+            <div class="question-element">
+                <h2 class="question">{{ newQuestion.question.value }}</h2>
+                <h2 class="nbr-question">{{ numberOfActualQuestion+1 }} / {{ numberOfQuestions }}</h2>
             </div>
-        </div>  
-        <button class="button-validate" @click="validateQuestion(pickedAnswer)">Validate</button>
+            <div class="answer">
+                <div v-for="(answer, index) in newQuestion.answers.value" :key="index" class="answer-element">
+                    <input type="radio" name="quiz-answer" :value="index" v-model="pickedAnswer"> 
+                    <label :for="index">{{ answer }}</label>
+                </div>
+            </div>  
+            <button class="button-validate" @click="validateQuestion(pickedAnswer)">Validate</button>
+        </div>
+
     </div>
     <QuizAnswer v-else/>
 </template>
 
 <style scoped>
+/* @import '../assets/base.css'; */
+
 div.quiz { 
     font-family: 'Montserrat';
     color: var(--main-dark-blue);
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 10em;
+}
+
+.question-element {
+    display: flex;
+    align-items: center;
+}
+
+.question-element h2 {
+    /* margin-right: 2em; */
+    padding: 0.5em;
+    height: 100%;
+    margin: 0;
+    font-weight: normal;
+
+}
+
+.quiz-content {
+    background-color: rgb(232, 238, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.question {
+    background-color: rgb(178, 195, 233);
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.nbr-question {
+    background-color: var(--main-dark-blue);
+    color: var(--main-yellow);
 }
 
 .answer-element label {
     font-size: 24px;
+    margin-right: 1em;
+}
+
+.answer-element input {
+    height: 2em;
+    width: 2em;
 }
 
 .answer-element {
     transition: all 0.5s ease-in-out;
+    display:flex;
+    margin: 1em;
+    padding: 0.5em;
+    background-color: var(--main-dark-blue);
+    color: var(--main-gray);
+    border: 2px solid var(--main-dark-blue);
+    border-radius: 2em;
 }
 
 .answer-element:hover {
-    color: var(--second-yellow);
+    color: var(--main-dark-blue);
+    background-color: var(--main-gray);
 }
 
 .button-validate {
     transition: all 0.5s ease-in-out;
     border: none;
-    border-radius: 20px;
-    padding: 5px;
+    border-radius: 5em;
+    padding: 0.7em;
     background: var(--main-dark-blue);
     color: var(--main-gray);
-    font-size: 20px;
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: normal;
+    text-transform: uppercase;
 }
 
 .button-validate:hover {
