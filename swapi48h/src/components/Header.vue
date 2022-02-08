@@ -5,7 +5,7 @@ import store from '../store.js';
 defineProps({
 
 })
-const liste = ["planets", "spaceships", "vehicles", "people", "films", "species"];
+const liste = ["planets", "starships", "vehicles", "people", "films", "species"];
 
 const router = useRouter();
 

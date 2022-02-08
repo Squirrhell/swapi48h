@@ -8,12 +8,14 @@
     const elements = ref([]);
     let listEl = [];
     async function getDataFromTheme(next) {
+        console.log(next);
         const option = {
             method: "GET",
         };
         const response = await fetch(next, option);
         if(response.status == 200) {
             response.json().then(data => {
+                console.log(data)
                 listEl = listEl.concat(data.results); 
                 if(data.next){
                     getDataFromTheme(data.next);
@@ -43,7 +45,7 @@
     <div class="element">
     <ul>
     <template v-for ="element in elements" :key="element">
-        <li v-if="store.state.selectedTheme == 'film'" @click="swapItem(element.url)">{{ element.title }}</li>
+        <li v-if="store.state.selectedTheme == 'films'" @click="swapItem(element.url)">{{ element.title }}</li>
         <li v-else @click="swapItem(element.url)">{{ element.name }}</li>
         
     </template>
