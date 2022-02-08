@@ -12,7 +12,7 @@ const store = createStore({
         }
         */
       ],
-      selectedTheme: null,
+      selectedTheme: 'planets',
 
     },
     mutations: {
