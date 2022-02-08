@@ -7,17 +7,26 @@ import Theme from "./components/Theme.vue";
 const notFound = { template: '<div>Error 404</div>' };
 
 const routes = [
+<<<<<<< HEAD
   /*  { 
+=======
+   /* { 
+>>>>>>> 344134f5c46ab0132690ad67bb11ff0939525391
         path: '/Home' , 
         name: 'Home', 
         component: Home
     },*/
     { 
-        path: '/Theme', 
+        path: '/theme', 
         name: 'Theme', 
         component: Theme
+<<<<<<< HEAD
     }/*,
     {
+=======
+    },
+    /*{
+>>>>>>> 344134f5c46ab0132690ad67bb11ff0939525391
         path: '/Wiki',
         name: 'Wiki',
         component: Wiki

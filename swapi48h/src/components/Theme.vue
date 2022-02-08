@@ -1,4 +1,5 @@
 <script setup> 
+<<<<<<< HEAD
  import store from '../store.js'
     import { ref, watch } from 'vue';
     const elements = ref([]);
@@ -7,6 +8,20 @@
         const option = {
             method: "GET",
         };
+=======
+    import store from '../store.js'
+    import { ref, watch } from 'vue';
+
+    const elements = ref([]);
+    let listEl = [];
+
+    async function getDataFromTheme(next) {
+
+        const option = {
+            method: "GET",
+        };
+
+>>>>>>> 344134f5c46ab0132690ad67bb11ff0939525391
         const response = await fetch(next, option);
         if(response.status == 200) {
             response.json().then(data => {
@@ -15,12 +30,23 @@
                     getDataFromTheme(data.next);
                 }
                 elements.value = listEl;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 344134f5c46ab0132690ad67bb11ff0939525391
             });
         }
         //await console.log(element.value);
     }
+<<<<<<< HEAD
     watch(() => store.state.selectedTheme, () => {getDataFromTheme('https://swapi.dev/api/'+store.state.selectedTheme)})
     getDataFromTheme('https://swapi.dev/api/'+store.state.selectedTheme);
+=======
+
+    watch(() => store.state.selectedTheme, () => {getDataFromTheme('https://swapi.dev/api/'+store.state.selectedTheme)})
+    getDataFromTheme('https://swapi.dev/api/'+store.state.selectedTheme);
+
+>>>>>>> 344134f5c46ab0132690ad67bb11ff0939525391
 </script>
 
 
