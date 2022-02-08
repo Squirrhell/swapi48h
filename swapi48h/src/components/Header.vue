@@ -44,16 +44,12 @@ body {
     height: 50px;
     border-radius: 30px;
     background-color: #FFF000;
-    margin-left: 15px;
-    margin-top: -5em;
-    z-index: 9;
-    float: left;
+    margin-left: 10px;
+    margin-top: 15px;
 }
 
 .menuBurger {
-    width: 50px;
-    height: 50px;
-
+    width:  50px;
 }
 
 li {

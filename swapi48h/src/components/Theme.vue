@@ -43,7 +43,7 @@
     </template>
     </ul>
     </div>
-    <div class="jabba"> <img class="imageJabba" src="../../image/Jabba_le_Hutt.png" alt=""></div>
+    <div class="galaxie"> <img class="imageGalaxie" src="../../image/Galaxymap_p1.jpg" alt=""></div>
 </template>
 
 
@@ -69,14 +69,14 @@ li {
     font-size: 2.5em;
 }
 
-.jabba {
+.galaxie {
     float: right;
     margin-top: -6em;
     margin-left: 50em;
     position: fixed;
 }
 
-.imageJabba {
+.imageGalaxie {
     border-radius: 30em;
     width: 30em;
     height: 30em;
