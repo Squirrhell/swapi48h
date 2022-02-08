@@ -21,6 +21,7 @@ const store = createStore({
     },
     mutations: {
       addQuestionQuiz: (state, newQuestion) => {state.listQuiz.push(newQuestion)},
+      throwQuestionQuiz: (state) => {state.listQuiz = []},
       setSelectedTheme: (state, newTheme) => {state.selectedTheme = newTheme},
 
     }
