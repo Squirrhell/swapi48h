@@ -4,6 +4,7 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
+<div>
   <header>
 
   </header>
@@ -15,6 +16,7 @@ import TheWelcome from './components/TheWelcome.vue'
   <footer>
 
   </footer>
+</div>
 </template>
 
 <style>
