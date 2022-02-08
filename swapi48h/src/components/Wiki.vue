@@ -10,75 +10,90 @@
     
     const urlElement = "https://swapi.dev/api/people/1/";
     const banWord = ["created", "edited", "url", "opening_crawl"];
-    const varData = ref("");
+    const varData = ref(null);
     
     async function getApiData(url){
         
         const response = await fetch(url);
         if(response.status == 200){
-            response.json().then(data => {
+            response.json().then(async data => {
                 console.log(data);
-                varData.value = data;
+                varData.value = await formatData(data);
             });
         }
-        return {};
+        //return {};
     }
 
     getApiData(urlElement);
 
-    async function callAPI(url){
+    async function callAPI(url, index){
 
-        let temp = ref("");
+        let temp;
 
         const response = await fetch(url);
+        
         if(response.status == 200){
             response.json().then(data => {
-                console.log(data);
-                temp.value = data;
+              
+                if(index != 'films'){
+                    temp = data.name;
+                      
+                } else {
+                    temp = data.title;
+                }
+                console.log(temp)
                 return temp;
             });
         }
     }
 
-    const formatData = computed (() => {
-        let formatedVarData = ref("");
+    async function formatData(data) {
+        let formatedVarData = {};
+        //console.log(Object.entries(varData.value))
 
-        for (let [key, element] of varData.value){
-            if(typeof element == "object" && key != "films" ){
-                let emptyArray = [];
-                for(let url in element){
-                    emptyArray.push(callAPI(element).name);
+        for (let [index, element] of Object.entries(data)){
+            let temp;
+
+            //console.log(element);
+
+            const regex = '^https:\/\/swapi\.dev\/api\/';
+            if(Array.isArray(element)){
+                temp = [];
+                for(let el of element){
+                    console.log(index)
+                    let t=await callAPI(el, index)
+                     temp.push(t);
+              
                 }
-                formatedVarData.key.value = emptyArray;
-
-            }else if (typeof element == 'object' && key == "films" ){
-                let emptyArray = [];
-                for(let url in element){
-                    emptyArray.push(callAPI(url).title);
-                }
-
-                formatedVarData.key.value = emptyArray;
-            }else if (element.match('^\https:\/\/+')){
-                formatedVarData.key.value = callAPI(element).name;
-            }else{
-                formatedVarData.key.value = element
+                console.log(element);
+            } else {
+                if(element.search(regex) != -1){
+                    temp = await callAPI(element, index);
+                    console.log(element); 
+                    console.log( await callAPI(element, index))
+                }else{
+                    temp = element;
+                    console.log(element);
+                }     
             }
-        }
-        console.log(formatedVarData)
-    })
 
-    console.log(formatData.value)
+         
+            formatedVarData[index] = await temp;
+        }
+        return formatedVarData;
+    }
+
     
 
 </script>
 
 <template>
 
-    <template v-for="(item, index) in formatedVarData" :key="item">
-        <h1 v-if="!(banWord.includes(index))">{{ index }}: {{ item }}</h1>
-
+    <template v-for="(item, index) in varData" :key="item">
+        <h1 v-if="!(banWord.includes(index))">{{ index }}: {{ item ? item:'' }}</h1>
     </template>
-    <!--div class="main">
+   <!-- 
+     <div class="main">
         <div class="data">
             <h1 v-for="(item, index) in varData" :key="item">
                 <template v-if="!(item in banWord)">
@@ -93,7 +108,7 @@
                 </template>
             </h1>
         </div>
-    </div-->
+    </div> -->
 </template>
 
 
