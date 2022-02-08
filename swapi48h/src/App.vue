@@ -1,6 +1,7 @@
-<script setup defer>
-import Header from './components/Header.vue';
-import Home from './components/Home.vue'
+
+<script setup>
+  import Header from './components/Header.vue';
+
 </script>
 
 <template>
@@ -34,6 +35,10 @@ header {
 html {
   min-height: 100vh ;
   /*background-color: #182840;*/
+}
+
+header {
+  background-color: #182840;
 }
 /*@import './assets/base.css';
 #app {

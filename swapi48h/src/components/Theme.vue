@@ -1,6 +1,10 @@
 <script setup> 
+    import { useRouter } from 'vue-router';
     import store from '../store.js'
     import { ref, watch } from 'vue';
+
+    const router = useRouter();
+
     const elements = ref([]);
     let listEl = [];
     async function getDataFromTheme(next) {
@@ -19,7 +23,15 @@
         }
         //await console.log(element.value);
     }
-    watch(() => store.state.selectedTheme, () => {getDataFromTheme('https://swapi.dev/api/'+store.state.selectedTheme)})
+
+    function swapItem(item){
+        store.commit('setSelectedItem', item);
+        router.push('wiki');
+    }
+
+
+    watch(() => store.state.selectedTheme, () => {listEl=[];getDataFromTheme('https://swapi.dev/api/'+store.state.selectedTheme)})
+
     getDataFromTheme('https://swapi.dev/api/'+store.state.selectedTheme);
 </script>
 
@@ -31,8 +43,8 @@
     <div class="element">
     <ul>
     <template v-for ="element in elements" :key="element">
-        <li v-if="store.state.selectedTheme == 'film'">{{ element.title }}</li>
-        <li v-else>{{ element.name }}</li>
+        <li v-if="store.state.selectedTheme == 'film'" @click="swapItem(element.url)">{{ element.title }}</li>
+        <li v-else @click="swapItem(element.url)">{{ element.name }}</li>
         
     </template>
     </ul>
