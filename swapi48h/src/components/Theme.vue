@@ -1,24 +1,30 @@
 <script setup> 
-new Vue({
-    el: '#app',
-    data () {
-        return{
-            info:null
+import store from '../store.js'
+const elements = ref([]);
+    async function getDataFromTheme() {
+        let next;
+        elements.value = [];
+        const option = {
+            method: "GET",
+        };
+        next = 'https://swapi.dev/api/'+store.state.selectedTheme;
+        while(next){
+            const response = await fetch(next, option);
+            if(response.status == 200) {
+                response.json().then(data => {
+                    elements.value.concat(data.results); 
+                    next = data.next;
+                });
+            }
         }
-    },
-    mounted (){
-        axios
-        .get('https://swapi.dev/api/')
-        .then(reponse =>(this.info = reponse))
     }
-})
+    watch(() => store.state.selectedTheme, () => {getDataFromTheme()})
 </script>
 
 <template>
-<div id="app">
-    {{ info }}
+<div class="api">
+    {{ data }}
 </div>
-
 </template>
 
 
