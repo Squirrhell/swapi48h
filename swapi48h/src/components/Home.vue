@@ -1,4 +1,7 @@
 <script setup>
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
 defineProps({
 })
 
@@ -11,7 +14,7 @@ defineProps({
         <h1 class="title" > Alijabba </h1>
         <h4 class="description" > Description mais je sais pas quoi mettre </h4>
         <div class="Button">
-            <a class="boutonQuiz" href=""> Quiz </a>
+            <p class="boutonQuiz" @click="router.push('quiz')"> Quiz </p>
         </div>
         
     </div>

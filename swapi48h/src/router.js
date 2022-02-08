@@ -19,7 +19,6 @@ const routes = [
     }/*,
     {
         path: '/wiki',
-
         name: 'Wiki',
         component: Wiki
     },
