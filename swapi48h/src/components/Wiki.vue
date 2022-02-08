@@ -68,7 +68,7 @@
                 }
                 console.log(element);
             } else {
-                if(element.search(regex) != -1){
+                if(typeof element == "string" && element.search(regex) != -1){
                     temp = await callAPI(element, index);
                     console.log(element); 
                     console.log( await callAPI(element, index))
