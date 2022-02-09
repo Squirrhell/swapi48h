@@ -39,6 +39,10 @@
         color: var(--main-dark-blue);
     }
 
+.question{
+    margin-top: 5em;
+}
+
     .green {
         background-color: green;
     }

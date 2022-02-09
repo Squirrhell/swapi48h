@@ -13,6 +13,8 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 ## Project Setup
 
 ```sh
+npm install vuex@next -- save
+npm install vue-router@4
 npm install
 ```
 
