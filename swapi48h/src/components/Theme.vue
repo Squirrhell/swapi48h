@@ -36,7 +36,7 @@
 
     getDataFromTheme('https://swapi.dev/api/'+store.state.selectedTheme);
     const image = computed(() => {
-        const list = ["planets", "spaceships", "vehicles", "people", "films", "species"];
+        const list = ["planets", "starships", "vehicles", "people", "films", "species"];
         let index = list.findIndex( theme => theme === store.state.selectedTheme);
         console.log(index);
         index++;
