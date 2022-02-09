@@ -4,8 +4,6 @@
 
     const props = defineProps({
         urlElement: {
-            //type: String,
-            //required: true
         }
     });
     
@@ -23,7 +21,6 @@
                 varData.value = await formatData(data);
             });
         }
-        //return {};
     }
 
     getApiData(urlElement);
@@ -43,7 +40,6 @@
                 } else {
                     temp = data.title;
                 }
-                //console.log(temp)
                 oui.value.push(temp)
                 return temp;
             });
@@ -52,31 +48,23 @@
 
     async function formatData(data) {
         let formatedVarData = {};
-        //console.log(Object.entries(varData.value))
 
         for (let [index, element] of Object.entries(data)){
             let temp;
-
-            //console.log(element);
 
             const regex = '^https:\/\/swapi\.dev\/api\/';
             if(Array.isArray(element)){
                 temp = [];
                 for(let el of element){
-                    //console.log(index)
                     let t=await callAPI(el, index)
                      temp.push(t);
               
                 }
-                //console.log(element);
             } else {
                 if(typeof element == "string" && element.search(regex) != -1){
                     temp = await callAPI(element, index);
-                    //console.log(element); 
-                    //console.log( await callAPI(element, index))
                 }else{
                     temp = element;
-                    //console.log(element);
                 }     
             }
 
@@ -92,8 +80,6 @@
         for (let [index, element] of Object.entries(varData.value)){
             
             let temp;
-            //console.log('oui')
-            //console.log(element);
             if(typeof element == 'object'){
                 temp = [];
                 console.log('object')
@@ -124,37 +110,31 @@
 </script>
 
 <template>
-<div class="wiki">
-    <template v-for="(item, index) in gruge" :key="item">
-        <h1 v-if="!(banWord.includes(index))">{{ index }}: {{ item ? item:'' }}</h1>
-    </template>
-   <!-- 
-     <div class="main">
-        <div class="data">
-            <h1 v-for="(item, index) in varData" :key="item">
-                <template v-if="!(item in banWord)">
-                    <h1>{{ index }}:</h1>
-                    <dir v-if="(typeof item) == 'object' && index != 'films'">
-                        <dir v-for="item in item" :key="item">{{ getApiData(item).name }}</dir>
-                    </dir>
-                    <dir v-else-if="(typeof item) == 'object' && index == 'films'"> 
-                        <dir v-for="item in item" :key="item">{{ getApiData(item).title }}</dir>
-                    </dir>
-                    <dir v-else>{{ item }}</dir>
-                </template>
-            </h1>
-        </div>
-    </div> -->
+<div class="yoda">
+    <img class="yoda" src="../../image/yoda.png">
 </div>
+    <table>
+    <div class="wiki">
+    <div v-for="(item, index) in varData" :key="item">
+        <tr v-if="!(banWord.includes(index))">
+            <td>{{ index }}:</td><th> {{ item ? item:'' }}</th></tr>
+    </div>
+    </div>
+    </table>
 </template>
 
 
 <style scoped>
+
 .wiki{
-    border-width:1px;
+    font-family:'Montserrat';
+    width: 20em;
+    height: auto;
+    font-size: 1.5em;
+    border:1px;
     border-style:dotted;
     border-color:black;
-    margin-left: 5em;
+    margin-left: 120%;
     z-index: -1;
     margin-top: 5em;
 }

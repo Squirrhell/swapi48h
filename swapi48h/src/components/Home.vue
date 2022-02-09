@@ -10,8 +10,8 @@ defineProps({
 <body>
 
     <div class="home">
-        <h1 class="title" > Alijabba </h1>
-        <h4 class="description" > Description mais je sais pas quoi mettre </h4>
+        <img class="logo" src="image/alijabba.png">
+        <p class="description" > L'équipe de AliJabba est fière de vous présenter le projet du Challenge 48h. </p>
         <div class="Button">
             <p class="boutonQuiz" @click="router.push('quiz')"> Quiz </p>
         </div>
@@ -33,6 +33,10 @@ body {
     /* bot: 0px; */
     overflow: hidden;
 }
+
+.logo {
+    height: 8em;
+}
 .home {
     margin-top: 15em;
     text-align: center;
@@ -45,18 +49,19 @@ body {
     transition: 0.5s;
 }
 .Button {
+    cursor: pointer;
     margin-top: 2em;
-    background-color: #FFF000;
-    width: 6.5em;
+    width: 8em;
     height: 4em;
-    border-radius: 10px;
+    background-color: #FFF000;
+    border-radius: 2em;
     text-align: center;
     transition: 0.5s;
     margin: auto;
 }
 .Button:hover {
     box-shadow: rgba(43, 12, 42, 0.2) 0 5px 14px;
-    width: 7em;
+    width: 8.2em;
     height: 4.2em;
     transition: 0.5s;
 }
@@ -70,8 +75,8 @@ body {
     font-size: 4.5em;
 }
 .description {
+    font-family: 'Montserrat';
     color: #EEEEEE;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 html {
