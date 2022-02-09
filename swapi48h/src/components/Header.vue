@@ -1,29 +1,42 @@
 <script setup>
+import { useRouter } from 'vue-router';
+import store from '../store.js';
+
 defineProps({
 
 })
-const liste = ["Planets", "Spaceships", "Vehicles", "People", "Films", "Species"];
+const liste = ["planets", "starships", "vehicles", "people", "films", "species"];
+
+const router = useRouter();
+
+
+function swapTheme(theme){
+    store.commit('setSelectedTheme', theme);
+    router.push('theme');
+};
+
 </script>
 
 <template>
 <body>  
+
     <div class="Header">
         <div class="burgerDiv">
             <img class="menuBurger" src="image/menu.png" alt="">
                 <div class="menu">        
                     <ul>
                         <li v-for="element in liste" :key="element">
-                            <a class="menuLien" href="">{{element}}</a> 
+                            <p class="menuLien" @click="swapTheme(element)">{{element}}</p> 
                         </li>
                         <li>
-                            <a class="menuLien" href="">Quiz</a> 
+                            <p class="menuLien" @click="router.push('quiz')">Quiz</p> 
                         </li>
                     </ul>
                 </div>
         </div> 
         <div class="divLogo">
             <a class="lienLogo" href="">
-                <img class="logo" src="image/alijabba.png" alt="">
+                <img class="logo" src="image/alijabba.png" alt="" @click="router.push('/')">
             </a>
         </div>
     </div>
@@ -31,29 +44,22 @@ const liste = ["Planets", "Spaceships", "Vehicles", "People", "Films", "Species"
 </template>
 
 <style scoped>
-body {
-    margin: 0px;
-    bottom: 0px;
-    /*background-color: #182840;*/
-    width: 100%;
-    height: 100%;
-}
 
 .burgerDiv {
     width: 50px;
     height: 50px;
     border-radius: 30px;
     background-color: #FFF000;
-    margin-left: 15px;
-    margin-top: -5em;
-    z-index: 9;
-    float: left;
+    margin-left: 10px;
+    margin-top: 15px;
+
+    position: relative;
+    z-index: 2;
+
 }
 
 .menuBurger {
-    width: 50px;
-    height: 50px;
-
+    width:  50px;
 }
 
 li {
@@ -129,6 +135,8 @@ li {
 
 .divLogo {
     width: 233.75px;
+    position: relative;
+    z-index: 1;
     float: right;
 }
 
@@ -138,8 +146,10 @@ li {
     width: 100%;
     height: 5em;
     position: fixed;
-    margin-top: -6em;
-    z-index: -7;
+    top: 0px;
+    /* margin-top: -9em; */
+    /* z-index: -7; */
 }
 
 </style>
+
