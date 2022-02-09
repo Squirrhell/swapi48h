@@ -5,7 +5,7 @@ import store from '../store.js';
 defineProps({
 
 })
-const liste = ["planets", "spaceships", "vehicles", "people", "films", "species"];
+const liste = ["planets", "starships", "vehicles", "people", "films", "species"];
 
 const router = useRouter();
 
@@ -19,6 +19,7 @@ function swapTheme(theme){
 
 <template>
 <body>  
+
     <div class="Header">
         <div class="burgerDiv">
             <img class="menuBurger" src="image/menu.png" alt="">
@@ -43,13 +44,6 @@ function swapTheme(theme){
 </template>
 
 <style scoped>
-body {
-    margin: 0px;
-    bottom: 0px;
-    /*background-color: #182840;*/
-    width: 100%;
-    height: 100%;
-}
 
 .burgerDiv {
     width: 50px;
@@ -58,6 +52,10 @@ body {
     background-color: #FFF000;
     margin-left: 10px;
     margin-top: 15px;
+
+    position: relative;
+    z-index: 2;
+
 }
 
 .menuBurger {
@@ -137,6 +135,8 @@ li {
 
 .divLogo {
     width: 233.75px;
+    position: relative;
+    z-index: 1;
     float: right;
 }
 
@@ -146,8 +146,10 @@ li {
     width: 100%;
     height: 5em;
     position: fixed;
-    margin-top: -6em;
-    z-index: -7;
+    top: 0px;
+    /* margin-top: -9em; */
+    /* z-index: -7; */
 }
 
 </style>
+
