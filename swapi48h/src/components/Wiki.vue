@@ -11,7 +11,8 @@
     
     const urlElement = store.state.selectedItem;
     const banWord = ["created", "edited", "url", "opening_crawl"];
-    const varData = ref(null);
+    const varData = ref({});
+    const oui = ref([]);
     
     async function getApiData(url){
         
@@ -42,7 +43,8 @@
                 } else {
                     temp = data.title;
                 }
-                console.log(temp)
+                //console.log(temp)
+                oui.value.push(temp)
                 return temp;
             });
         }
@@ -61,20 +63,20 @@
             if(Array.isArray(element)){
                 temp = [];
                 for(let el of element){
-                    console.log(index)
+                    //console.log(index)
                     let t=await callAPI(el, index)
                      temp.push(t);
               
                 }
-                console.log(element);
+                //console.log(element);
             } else {
                 if(typeof element == "string" && element.search(regex) != -1){
                     temp = await callAPI(element, index);
-                    console.log(element); 
-                    console.log( await callAPI(element, index))
+                    //console.log(element); 
+                    //console.log( await callAPI(element, index))
                 }else{
                     temp = element;
-                    console.log(element);
+                    //console.log(element);
                 }     
             }
 
@@ -83,6 +85,42 @@
         }
         return formatedVarData;
     }
+
+    const gruge = computed (() => {
+        let formatedVarData = {};
+        let ii = 0;
+        for (let [index, element] of Object.entries(varData.value)){
+            
+            let temp;
+            //console.log('oui')
+            //console.log(element);
+            if(typeof element == 'object'){
+                temp = [];
+                console.log('object')
+                element = JSON.parse(JSON.stringify(element))
+                for(let el of element){
+                    if(el === null){
+                        console.log(oui.value[ii])
+                        el = oui.value[ii];
+                        ii++;
+                        temp.push(el);
+                    }              
+                }
+            } else {
+                if(element === undefined){
+                    console.log(oui.value[ii])
+                    temp = oui.value[ii];
+                    ii++;
+                }else{
+                    temp = element;
+                }     
+            }
+            formatedVarData[index] = temp;
+        }
+        return formatedVarData;
+    });
+
+
 </script>
 
 <template>
