@@ -86,37 +86,39 @@
 </script>
 
 <template>
-<div class="wiki">
-    <template v-for="(item, index) in varData" :key="item">
-        <h1 v-if="!(banWord.includes(index))">{{ index }}: {{ item ? item:'' }}</h1>
-    </template>
-   <!-- 
-     <div class="main">
-        <div class="data">
-            <h1 v-for="(item, index) in varData" :key="item">
-                <template v-if="!(item in banWord)">
-                    <h1>{{ index }}:</h1>
-                    <dir v-if="(typeof item) == 'object' && index != 'films'">
-                        <dir v-for="item in item" :key="item">{{ getApiData(item).name }}</dir>
-                    </dir>
-                    <dir v-else-if="(typeof item) == 'object' && index == 'films'"> 
-                        <dir v-for="item in item" :key="item">{{ getApiData(item).title }}</dir>
-                    </dir>
-                    <dir v-else>{{ item }}</dir>
-                </template>
-            </h1>
-        </div>
-    </div> -->
-</div>
+    <table>
+        <th>
+            <div class="vador">
+                <img class="vadorr" src="../../image/vador.png" alt="">
+            </div>
+        </th>
+        <th>
+<div class="yoda">
+    <img class="yodaa" src="../../image/yoda.png" alt="">
+</div></th>
+    <div class="wiki">
+    <div v-for="(item, index) in varData" :key="item">
+        <tr v-if="!(banWord.includes(index))">
+            <td>{{ index }}:</td><th> {{ item ? item:'' }}</th></tr>
+    </div>
+    </div>
+    </table>
 </template>
 
 
 <style scoped>
+.yodaa{
+    margin-right: 100%;
+}
 .wiki{
-    border-width:1px;
+    font-family:Georgia, serif;
+    width: 20em;
+    height: auto;
+    font-size: 1.5em;
+    border:1px;
     border-style:dotted;
     border-color:black;
-    margin-left: 5em;
+    margin-left: 40%;
     z-index: -1;
     margin-top: 5em;
 }
