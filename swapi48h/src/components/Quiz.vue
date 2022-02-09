@@ -5,15 +5,9 @@ import QuizAnswer from "./QuizAnswer.vue";
 
 import questionsJSON from "../assets/questions.json"
 
-// const props = defineProps({
-
-// })
-
 store.commit("throwQuestionQuiz") //appel la "fonction" dans mutations du store
 
-//actualQuestion.value pour recup une valeur
 const isLoading = ref(false);
-const actualQuestion = ref('This is the question?');
 const numberOfQuestions = ref(10);
 let numberOfActualQuestion = ref(0);
 const pickedAnswer = ref('');
@@ -30,8 +24,6 @@ generateNewQuestion();
 
 async function validateQuestion(indexOfChosenAnswer) {
     isLoading.value = true;
-
-    console.log(indexOfChosenAnswer)
     newQuestion.answer = indexOfChosenAnswer; //on ajoute à "answer", l'index de la réponse choisi par l'utilisateur
 
     let finalNewQuestion = {
@@ -45,21 +37,12 @@ async function validateQuestion(indexOfChosenAnswer) {
 
     await generateNewQuestion();
 
-    console.log(store.state.listQuiz)
-
-    console.log(newQuestion.answers[1]);
-
     numberOfActualQuestion.value += 1;
-
-    // isLoading.value = false;
 }
 
 async function generateNewQuestion() {
     isLoading.value = true; //On met isLoading à "true" pour ne pas afficher de question
     let randomQuestionID = Math.floor(Math.random() * questionsJSON.length)
-
-    
-    console.log(questionsJSON[randomQuestionID].question)
 
     let questionFormat = await getNewQuestionElements(questionsJSON[randomQuestionID].missingWordCategory, questionsJSON[randomQuestionID].missingWordType, questionsJSON[randomQuestionID].answerKey)
     
@@ -87,14 +70,7 @@ async function getNewQuestionElements(missingWordCategory, missingWordType, answ
         const data = await response.json();
         allDataTheme.value = data;
     }
-    
-    //Nombre random entre 0 et le nombre de valeur dans une catégorie
-    // let randomRightID = Math.floor(Math.random() * allDataTheme.value.count);
-    //------------------
-    //ca risque de planter, certaines entrées sont vides (ex: vehicles/1, le premier est le 4 puis ça passe à 11)
 
-    // const missingWordInQuestion = await getCorrespondingInfo(urlData+`/${randomRightID}`, missingWordType)
-    // const rightAnswer = await getCorrespondingInfo(urlData+`/${randomRightID}`, answerKey);
     const [missingWordInQuestion, rightAnswer] = await getCorrespondingInfo(urlData, allDataTheme.value.count, missingWordType, answerKey)
     const wrongAnswers = [];
     
@@ -135,14 +111,10 @@ async function getCorrespondingInfo(urlToGet, nbrOfElements, ...keysOfElement) {
     if(response.status == 200) {
         const data = await response.json();
         element.value = data;
-        console.log("JE SUIS ICI")
     } else {
-        console.log("JE SUIS TON PADRE MON POTE")
-        // console.log(urlToGet)
         return getCorrespondingInfo(urlToGet, nbrOfElements, keysOfElement)
     }
 
-    console.log("mais vasi-je ici juste apres le padre ??")
     let finalValues = [];
 
     for(let key of keysOfElement) {
@@ -198,7 +170,6 @@ function randomizeAnswer(rightAnswer, wrongAnswers) {
 </template>
 
 <style scoped>
-/* @import '../assets/base.css'; */
 
 div.quiz { 
     font-family: 'Montserrat';
@@ -215,7 +186,6 @@ div.quiz {
 }
 
 .question-element h2 {
-    /* margin-right: 2em; */
     padding: 0.5em;
     height: 100%;
     margin: 0;

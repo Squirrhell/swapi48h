@@ -73,7 +73,6 @@
     }
 
     .quiz-answer h2 {
-        /* background-color: rgb(178, 195, 233); */
         font-weight: normal;
         text-transform: uppercase;
     }   
