@@ -124,16 +124,10 @@
 </script>
 
 <template>
-    <table>
-        <th>
-            <div class="vador">
-                <img class="vadorr" src="../../image/vador.png" alt="">
-            </div>
-        </th>
-        <th>
 <div class="yoda">
-    <img class="yodaa" src="../../image/yoda.png" alt="">
-</div></th>
+    <img class="yoda" src="../../image/yoda.png">
+</div>
+    <table>
     <div class="wiki">
     <div v-for="(item, index) in varData" :key="item">
         <tr v-if="!(banWord.includes(index))">
@@ -145,9 +139,7 @@
 
 
 <style scoped>
-.yodaa{
-    margin-right: 100%;
-}
+
 .wiki{
     font-family:Georgia, serif;
     width: 20em;
@@ -156,7 +148,7 @@
     border:1px;
     border-style:dotted;
     border-color:black;
-    margin-left: 40%;
+    margin-left: 120%;
     z-index: -1;
     margin-top: 5em;
 }
