@@ -4,8 +4,6 @@
 
     const props = defineProps({
         urlElement: {
-            //type: String,
-            //required: true
         }
     });
     
@@ -23,7 +21,6 @@
                 varData.value = await formatData(data);
             });
         }
-        //return {};
     }
 
     getApiData(urlElement);
@@ -43,7 +40,6 @@
                 } else {
                     temp = data.title;
                 }
-                //console.log(temp)
                 oui.value.push(temp)
                 return temp;
             });
@@ -52,31 +48,23 @@
 
     async function formatData(data) {
         let formatedVarData = {};
-        //console.log(Object.entries(varData.value))
 
         for (let [index, element] of Object.entries(data)){
             let temp;
-
-            //console.log(element);
 
             const regex = '^https:\/\/swapi\.dev\/api\/';
             if(Array.isArray(element)){
                 temp = [];
                 for(let el of element){
-                    //console.log(index)
                     let t=await callAPI(el, index)
                      temp.push(t);
               
                 }
-                //console.log(element);
             } else {
                 if(typeof element == "string" && element.search(regex) != -1){
                     temp = await callAPI(element, index);
-                    //console.log(element); 
-                    //console.log( await callAPI(element, index))
                 }else{
                     temp = element;
-                    //console.log(element);
                 }     
             }
 
@@ -92,8 +80,6 @@
         for (let [index, element] of Object.entries(varData.value)){
             
             let temp;
-            //console.log('oui')
-            //console.log(element);
             if(typeof element == 'object'){
                 temp = [];
                 console.log('object')
@@ -141,7 +127,7 @@
 <style scoped>
 
 .wiki{
-    font-family:Georgia, serif;
+    font-family:'Montserrat';
     width: 20em;
     height: auto;
     font-size: 1.5em;

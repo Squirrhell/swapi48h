@@ -65,10 +65,11 @@ function swapTheme(theme){
 li {
     font-size: 35px;
     list-style: none;
-    line-height: 70px;
+    line-height: 55px;
     visibility: hidden;
     opacity: 0;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .menuLien {
@@ -109,7 +110,7 @@ li {
     bottom: 0px;
     background-color: #FFF000;
     height: 100%;
-    width: 240px;
+    width: 300px;
     transition: 0.5s;
 
 }
@@ -117,7 +118,7 @@ li {
 .burgerDiv:hover li {
     font-size: 35px;
     list-style: none;
-    line-height: 70px;
+    line-height: 55px;
     visibility: visible;
     opacity: 1;
     transition: 0.5s;
@@ -147,8 +148,6 @@ li {
     height: 5em;
     position: fixed;
     top: 0px;
-    /* margin-top: -9em; */
-    /* z-index: -7; */
 }
 
 </style>

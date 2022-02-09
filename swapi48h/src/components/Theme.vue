@@ -8,14 +8,12 @@
     const elements = ref([]);
     let listEl = [];
     async function getDataFromTheme(next) {
-        console.log(next);
         const option = {
             method: "GET",
         };
         const response = await fetch(next, option);
         if(response.status == 200) {
             response.json().then(data => {
-                console.log(data)
                 listEl = listEl.concat(data.results); 
                 if(data.next){
                     getDataFromTheme(data.next);
@@ -23,7 +21,6 @@
                 elements.value = listEl;
             });
         }
-        //await console.log(element.value);
     }
 
     function swapItem(item){
@@ -38,7 +35,6 @@
     const image = computed(() => {
         const list = ["planets", "starships", "vehicles", "people", "films", "species"];
         let index = list.findIndex( theme => theme === store.state.selectedTheme);
-        console.log(index);
         index++;
         return index;
     })
@@ -47,7 +43,7 @@
 
 <template>
 <div class="theme">
-    <h1> {{store.state.selectedTheme}}:</h1>
+    <h1> {{store.state.selectedTheme}}</h1>
 </div>
     <div class="element">
     <ul>
@@ -72,7 +68,16 @@
     color: #182840 ;
     font-size: 2em;
     font-family: 'Montserrat';
+    width: 15em;
 }
+
+.theme h1 {
+    text-transform: uppercase;
+    background-color: #182840;
+    color: #fff;
+    padding-left: 0.3em;
+}
+
 .element{
     margin-top: -0.5em;
     margin-left: 12em;
@@ -80,11 +85,18 @@
     size: 2em;
 }
 li {
+    font-weight: 100;
     list-style: none;
     color: #182840;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2.5em;
+    cursor: pointer;
 }
+
+li:hover {
+    color: #243d63;
+}
+
 .galaxie {
     float: right;
     margin-top: -7em;

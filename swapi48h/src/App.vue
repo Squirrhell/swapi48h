@@ -23,6 +23,8 @@
 
 
 <style>
+@import './assets/base.css';
+
 body {
   background-color: #EEEEEE;
   margin: 0;
@@ -40,6 +42,7 @@ html {
 header {
   background-color: #182840;
 }
+
 /*@import './assets/base.css';
 #app {
   max-width: 0px;
